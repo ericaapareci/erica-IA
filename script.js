@@ -1,81 +1,116 @@
-const caixaPrincipal = document.querySelector(".caixa-Principal");
-const caixaPerguntas = document.querySelector(".caixa-Perguntas");
-const caixaAlternativa = document.querySelector(".caixa-Alternativas");
-const caixaResultados = document.querySelector(".caixa-Resultados");
-const textoResultados = document.querySelector(".texto-Resultados");
+const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaPerguntas = document.querySelector(".caixa-pergunta");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultados = document.querySelector(".caixa-resultados");
+const textoResultados = document.querySelector(".texto-resultados");
 
-
-const Perguntas = [
+const perguntas = [
     {
-        enunciado: "Onde esta a agua de marte?",
-
-
+        enunciado: "Qual o planeta desconsiderado de nosso sistema solar?",
         alternativas: [
-            "Abaixo do solo.",
-            "Na superficie do solo."
+            {
+                texto:"Plutão.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"Jupter.",
+                afirmacao:"afirmação."
+                
+
+            }
+        
+        ]
+
+    },
+    {
+        enunciado: "Qual a galáxia mais proxima da nossa?",
+        alternativas: [
+            {
+                texto:"Nuvem de Magalhões.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"Andrõmeda.",
+                afirmacao:"afirmação."
+                
+
+            }
+        
+        ]
+
+    },
+    {
+        enunciado: "Quantos planetas existem em nosso sistema solar.",
+        alternativas: [
+            {
+                texto:"15 planetas.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"8 planetas.",
+                afirmacao:"afirmação."
+                
+
+            }
+        
+    
         ]
 
 
-
-
     },
-
     {
-        enunciado: "Como foi o surgimento do universo?",
-
+        enunciado: "Nosso uníverso é considerado infinito?",
         alternativas: [
-            "Atraves de um atomo muito denso e energizado.",
-            "Nao se ssbe de como foi a existencia."
+            {
+                texto:"Não.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"Sim.",
+                afirmacao:"afirmação"
+                
 
+            }
+        
+        
         ]
 
-
-    },
-
-    {
-        enunciado: "Depois que Gabriel escreveu o trabalho, teve uma discussão sobre o impacto da IA no trabalho do futuro o que Gabriel faz:",
-
-        alternativas: [
-            "Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas",
-            "Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores."
-        ]
-    },
-
-    {
-        enunciado: "Ao final da discussão, Gabriel precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
-
-        alternativas: [
-            "Criar uma imagem utilizando um gerador de imagem de IA.",
-            "Criar uma imagem utilizando uma plataforma de design como o Paint."
-        ]
-    },
-
-    {
-        enunciado: "Ao final da discussão, Gabriel precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
-
-        alternativas: [
-            "Criar uma imagem utilizando um gerador de imagem de IA.",
-            "Criar uma imagem utilizando uma plataforma de design como o Paint."
-        ]
-    },
+    }
 
 ];
 
 let atual = 0;
 let perguntaAtual;
+let historiaFinal = "";
 
 function mostraPergunta() {
-    perguntaAtual = Perguntas[atual];
+    if(atual >= perguntas.length){
+        mostraResultado();
+        return
+    }
+    perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
     mostraAlternativas();
 }
 
-function mostraAlternativas() {
+function mostraAlternativas(){
     for(const alternativa of perguntaAtual.alternativas){
         const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativa;
-        caixaAlternativa.appendChild(botaoAlternativas);
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click",() => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
 
+function respostaSelecionada(opcaoSelecionada){
+           atual++;
+           mostraPergunta();
+           const afirmacoes = opcaoSelecionada
+        }
+ function mostraResultado(){
+    caixaPerguntas.textContent = "Na astronomia, o Universo corresponde ao conjunto de toda a matéria, energia, espaço e tempo existente. Ele reúne os astros: planetas, cometas, estrelas, galáxias, nebulosas, satélites, dentre outros.O universo é, portanto, mais que um local imenso, ele é tudo, e engloba tudo o que existe. Para muitos, infinito. Note que do latim, a palavra universum significa “todo inteiro” ou “tudo em um só”. O Sistema Solar é composto por oito planetas, conforme se considera hoje em dia, além de planetas anões e corpos celestes, como asteroides, meteoros, cometas e satélites.";
+    textoResultados.textContent = historiaFinal += afirmacoes + " ";
+    caixaAlternativas.textContent = "";
+ }       
 mostraPergunta();
